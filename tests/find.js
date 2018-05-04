@@ -39,4 +39,15 @@ describe("find", function () {
       },
     ]);
   });
+  it("should be able find other attributes of other tags", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src=//example.com/abc.jpg/></div>', {
+      attr: "class",
+      tag: "div",
+    }), [
+      {
+        value: 'my-class',
+        index: 15,
+      },
+    ]);
+  });
 });
