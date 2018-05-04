@@ -1,29 +1,30 @@
-const getAttrList = require("./utils/getAttrList");
+const find = require("./find");
 
-function find(html, settings = { tag: "img", attr: "src" }) {
-  const results = [];
-  const { tag = "img", attr = "src" } = settings;
-  let tagRegexp = new RegExp(`<${tag} (.+?)/?>`, "img");
-  let tagRegexpMatch = tagRegexp.exec(html);
-  let tagRegexpMatches = [];
-  while (tagRegexpMatch != null) {
-    tagRegexpMatches.push({
-      index: tagRegexpMatch.index + 2 + tag.length,
-      value: tagRegexpMatch[1],
-    });
-    tagRegexpMatch = tagRegexp.exec(html);
+function normalizeCallback(callback) {
+  if (typeof callback === 'string') {
+    return () => callback;
+  } else {
+    return callback;
   }
-  // tagRegexpMatches = [ 'src="./hello.jpg"', 'width=100 src="./hello.jpg"' ]
-  tagRegexpMatches.forEach(match => {
-    let attrList = getAttrList(match.value);
-    console.log(tagRegexpMatches, attrList);
-    let attrValue = attrList[attr];
-    if (attrValue) {
-      results.push({ ...attrValue, index: attrValue.index + match.index });
-    }
-  });
-
-  return results;
 }
 
-module.exports = find;
+function replace(html, callback, settings = { tag: "img", attr: "src" }) {
+  let normalizedCallback = normalizeCallback(callback);
+  let findResult = find(html, settings);
+  let segments = [];
+  let pointer = 0;
+  findResult.forEach(result => {
+    if (result.index > pointer) {
+      segments.push(html.substring(pointer, result.index));
+      pointer = result.index;
+    }
+    pointer += result.value.length;
+    segments.push(normalizedCallback(result.value));
+  });
+  if (pointer < html.length) {
+    segments.push(html.substring(pointer, html.length - 1))
+  }
+  return segments.join('');
+}
+
+module.exports = replace;

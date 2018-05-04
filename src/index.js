@@ -1,2 +1,3 @@
 const find = require("./find");
-module.exports = { find };
+const replace = require("./replace");
+module.exports = { find, replace };
