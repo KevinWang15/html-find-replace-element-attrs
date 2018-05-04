@@ -1,3 +1,4 @@
 const find = require("./find");
 const replace = require("./replace");
-module.exports = { find, replace };
+const replaceAsync = require("./replaceAsync");
+module.exports = { find, replace, replaceAsync };
