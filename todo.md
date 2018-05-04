@@ -1,6 +1,11 @@
 - [ ] finish API: find
 - [ ] finish API: replace
 - [ ] finish API: replaceAsync
+- [ ] finish: parsedLink
 - [ ] finish DEMO: download and replace all image links in html
 - [ ] escaping: character ">" in attr value
 - [ ] escaping: \\" in ".."
+- [ ] coverage
+- [ ] typescript
+- [ ] npm publish
+- [ ] rename to ```html-attr-manipulate```?
