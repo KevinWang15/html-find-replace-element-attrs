@@ -2,6 +2,7 @@ function getAttrList(raw) {
   let list = {};
   let attrName = "";
   let attrValue = "";
+  let valueIndex = 0;
   let state = 0; // 0 = looking for attr, 1 = looking for value
   let quote = "";
   for (let i = 0; i < raw.length; i++) {
@@ -19,6 +20,7 @@ function getAttrList(raw) {
           quote = ` `; // space for no-quotes
           i--;
         }
+        valueIndex = i + 1;
       } else if (state === 1) {
         if (!quote) {
           throw "unexpected =";
@@ -27,7 +29,7 @@ function getAttrList(raw) {
       }
     } else if (quote && next === quote) {
       state = 0;
-      list [attrName] = attrValue;
+      list [attrName] = { value: attrValue, index: valueIndex };
       // works too for "space for no-quotes"
     } else if (next === ` `) {
       if (state === 1) {
@@ -52,14 +54,18 @@ function find(html, settings = { tag: "img", attr: "src" }) {
   let tagRegexpMatch = tagRegexp.exec(html);
   let tagRegexpMatches = [];
   while (tagRegexpMatch != null) {
-    tagRegexpMatches.push(tagRegexpMatch[1]);
+    tagRegexpMatches.push({
+      index: tagRegexpMatch.index + 2 + tag.length,
+      value: tagRegexpMatch[1],
+    });
     tagRegexpMatch = tagRegexp.exec(html);
   }
   // tagRegexpMatches = [ 'src="./hello.jpg"', 'width=100 src="./hello.jpg"' ]
   tagRegexpMatches.forEach(match => {
-    let attrList = getAttrList(match);
-    if (attrList[attr]) {
-      results.push(attrList[attr]);
+    let attrList = getAttrList(match.value);
+    let attrValue = attrList[attr];
+    if (attrValue) {
+      results.push({ ...attrValue, index: attrValue.index + match.index });
     }
   });
 

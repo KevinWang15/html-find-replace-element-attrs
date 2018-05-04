@@ -4,12 +4,22 @@ const assert = chai.assert;
 
 describe("find", function () {
   it("should find all occurrences of src in an html string", function () {
-    assert.deepEqual(htmlFindSrc.find('...<img src="./hello.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...'), ["./hello.jpg"]);
+    assert.deepEqual(htmlFindSrc.find('...<img src="./hello.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...'),
+      [{
+        value: "./hello.jpg",
+        index: 13,
+      }]);
   });
   it("should be able to handle = in quotes", function () {
-    assert.deepEqual(htmlFindSrc.find('...<img src="./1=2.jpg"/>'), ["./1=2.jpg"]);
+    assert.deepEqual(htmlFindSrc.find('...<img src="./1=2.jpg"/>'), [{
+      value: './1=2.jpg',
+      index: 13,
+    }]);
   });
   it("should be able to handle cases without quotes", function () {
-    assert.deepEqual(htmlFindSrc.find('...<img src=abc.jpg width=100/>'), ["abc.jpg"]);
+    assert.deepEqual(htmlFindSrc.find('...<img src=abc.jpg width=100/>'), [{
+      value: 'abc.jpg',
+      index: 12,
+    }]);
   });
 });
