@@ -4,11 +4,14 @@ const assert = chai.assert;
 
 describe("find", function () {
   it("should find all occurrences of src in an html string", function () {
-    assert.deepEqual(htmlFindSrc.find('...<img src="./hello.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...'),
+    assert.deepEqual(
+      htmlFindSrc.find(
+        '...<img src="./hello.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...',
+      ),
       [
         {
-        value: "./hello.jpg",
-        index: 13,
+          value: "./hello.jpg",
+          index: 13,
         },
         {
           "index": 58,

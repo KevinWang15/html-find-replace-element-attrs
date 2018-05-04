@@ -4,11 +4,7 @@
 
 # API
 
-## find(html, options?)
-
-```javascript
-find('...<img src="./hello.jpg"/>...')
-```
+## [find(html, options?)](./tests/find.js)
 
 ## replace(html, callback, options?)
 
