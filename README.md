@@ -6,17 +6,9 @@
 
 ## [find(html, options?)](./tests/find.js)
 
-## replace(html, callback, options?)
+## [replace(html, callback, options?)](./tests/replace.js)
 
-```javascript
-...
-```
-
-## replaceAsync(html, callback, options?)
-
-```javascript
-...
-```
+## [replaceAsync(html, callback, options?)](./tests/replaceAsync.js)
 
 ## available options
 
