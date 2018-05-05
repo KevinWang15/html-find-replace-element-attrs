@@ -1,6 +1,7 @@
 const htmlFindSrc = require("../src");
 const chai = require("chai");
 const assert = chai.assert;
+const expect = chai.expect;
 
 describe("find", function () {
   it("should find all occurrences of src in an html string", function () {
@@ -18,6 +19,36 @@ describe("find", function () {
           "value": "./hello.jpg",
         },
       ]);
+  });
+  it("should work with single quotes", function () {
+    assert.deepEqual(
+      htmlFindSrc.find(
+        "...<img src='./hello.jpg'>abc</img>...",
+      ),
+      [
+        {
+          value: "./hello.jpg",
+          index: 13,
+        },
+      ]);
+  });
+  it("should work with space in attr", function () {
+    assert.deepEqual(
+      htmlFindSrc.find(
+        "...<img src='./hello world.jpg'>abc</img>...",
+      ),
+      [
+        {
+          value: "./hello world.jpg",
+          index: 13,
+        },
+      ]);
+  });
+  it("should throw when encountering unexpected =", function () {
+    expect(
+      () => htmlFindSrc.find(
+        "...<img src=helloworld=aaa>abc</img>...",
+      )).to.throw();
   });
   it("should be able to handle = in quotes", function () {
     assert.deepEqual(htmlFindSrc.find('...<img src="./1=2.jpg"/>'), [{

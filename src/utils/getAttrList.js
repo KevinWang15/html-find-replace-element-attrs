@@ -22,7 +22,7 @@ function getAttrList(raw) {
         }
         valueIndex = i + 1;
       } else if (state === 1) {
-        if (!quote) {
+        if (!quote || quote === ' ') {
           throw "unexpected =";
         }
         attrValue += next;
