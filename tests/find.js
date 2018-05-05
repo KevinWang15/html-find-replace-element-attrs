@@ -145,14 +145,14 @@ describe("find", function () {
     ]);
   });
   it("should work with special html entities", function () {
-    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&quot;.png" alt=""></div>', {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&clubs;/&quot;.png" alt=""></div>', {
       parseAttrValueAsUrl: true,
       tag: "img", attr: "src",
     }), [
       {
         "index": 35,
-        "parsedUrl": "http://www.example.com/\".png",
-        "value": "http://www.example.com/&quot;.png",
+        "parsedUrl": "http://www.example.com/♣/\".png",
+        "value": "http://www.example.com/&clubs;/&quot;.png"
       },
     ]);
     assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&quot.png" alt=""></div>', {
