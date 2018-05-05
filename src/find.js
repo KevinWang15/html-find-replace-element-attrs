@@ -1,9 +1,15 @@
 const getAttrList = require("./utils/getAttrList");
 const parseUrl = require("./utils/parseUrl");
 
-function find(html, settings = { tag: "img", attr: "src", "parseAttrValueAsUrl": false }) {
+function find(html, options = { tag: "", attr: "", "parseAttrValueAsUrl": false }) {
   const results = [];
-  const { tag = "img", attr = "src", parseAttrValueAsUrl = false } = settings;
+  const { tag, attr, parseAttrValueAsUrl = false } = options;
+  if (!tag) {
+    throw "tag is required"
+  }
+  if (!attr) {
+    throw "tag is required"
+  }
   let tagRegexp = new RegExp(`<${tag} (.+?)/?>`, "img");
   let tagRegexpMatch = tagRegexp.exec(html);
   let tagRegexpMatches = [];
@@ -21,7 +27,7 @@ function find(html, settings = { tag: "img", attr: "src", "parseAttrValueAsUrl":
     if (attrValue) {
       let item = { ...attrValue, index: attrValue.index + match.index };
       if (parseAttrValueAsUrl) {
-        item.parsedUrl = parseUrl(attrValue.value, settings);
+        item.parsedUrl = parseUrl(attrValue.value, options);
       }
       results.push(item);
     }

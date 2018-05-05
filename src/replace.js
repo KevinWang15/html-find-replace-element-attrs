@@ -8,9 +8,9 @@ function normalizeCallback(callback) {
   }
 }
 
-function replace(html, callback, settings = { tag: "img", attr: "src" }) {
+function replace(html, callback, options) {
   let normalizedCallback = normalizeCallback(callback);
-  let findResult = find(html, settings);
+  let findResult = find(html, options);
   let segments = [];
   let pointer = 0;
   findResult.forEach(result => {

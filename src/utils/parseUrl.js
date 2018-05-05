@@ -2,7 +2,6 @@ const urlJoin = require("url-join");
 
 function processDotDot(url) {
   let match = url.match(/^((?:\w+:)?\/\/)?(.+?)$/im);
-  console.log("process dotdot", match[1], match[2]);
   let stack = match[2].split('/');
   let newStack = [];
   for (let i = 0; i < stack.length; i++) {
@@ -17,8 +16,8 @@ function processDotDot(url) {
   return match[1]+newStack.join('/');
 }
 
-function parseUrl(urlToParse, settings = {}) {
-  let { urlProtocol, baseUrl } = settings;
+function parseUrl(urlToParse, options = {}) {
+  let { urlProtocol, baseUrl } = options;
 
   if (urlToParse.startsWith("//")) {
     // it should parse protocol-relative URL
@@ -26,7 +25,6 @@ function parseUrl(urlToParse, settings = {}) {
       let protocalMatch = baseUrl.match(/^(\w+:)?\/\//im);
       if (protocalMatch != null) {
         urlProtocol = protocalMatch[1];
-        console.log(`setting url protocol {${urlProtocol}`)
       }
     }
     if (!urlProtocol) {

@@ -8,6 +8,7 @@ describe("find", function () {
     assert.deepEqual(
       htmlFindSrc.find(
         '...<img src="./hello.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...',
+        { tag: "img", attr: "src" },
       ),
       [
         {
@@ -24,6 +25,7 @@ describe("find", function () {
     assert.deepEqual(
       htmlFindSrc.find(
         "...<img src='./hello.jpg'>abc</img>...",
+        { tag: "img", attr: "src" },
       ),
       [
         {
@@ -36,6 +38,7 @@ describe("find", function () {
     assert.deepEqual(
       htmlFindSrc.find(
         "...<img src='./hello world.jpg'>abc</img>...",
+        { tag: "img", attr: "src" },
       ),
       [
         {
@@ -48,42 +51,39 @@ describe("find", function () {
     expect(
       () => htmlFindSrc.find(
         "...<img src=helloworld=aaa>abc</img>...",
+        { tag: "img", attr: "src" },
       )).to.throw();
   });
   it("should be able to handle = in quotes", function () {
-    assert.deepEqual(htmlFindSrc.find('...<img src="./1=2.jpg"/>'), [{
+    assert.deepEqual(htmlFindSrc.find('...<img src="./1=2.jpg"/>', { tag: "img", attr: "src" }), [{
       value: './1=2.jpg',
       index: 13,
     }]);
   });
   it("should be able to handle cases without quotes", function () {
-    assert.deepEqual(htmlFindSrc.find('...<img src=abc.jpg width=100/>'), [{
+    assert.deepEqual(htmlFindSrc.find('...<img src=abc.jpg width=100/>', {
+      tag: "img",
+      attr: "src",
+    }), [{
       value: 'abc.jpg',
       index: 12,
     }]);
   });
   it("should be able to handle cases without quotes (case 2)", function () {
-    assert.deepEqual(htmlFindSrc.find('...<img src=//example.com/abc.jpg/>'), [
+    assert.deepEqual(htmlFindSrc.find('...<img src=//example.com/abc.jpg/>', {
+      tag: "img",
+      attr: "src",
+    }), [
       {
         "index": 12,
         "value": "//example.com/abc.jpg",
       },
     ]);
   });
-  it("should be able find other attributes of other tags", function () {
-    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src=//example.com/abc.jpg/></div>', {
-      attr: "class",
-      tag: "div",
-    }), [
-      {
-        value: 'my-class',
-        index: 15,
-      },
-    ]);
-  });
   it("should be able to work with parseUrl", function () {
     assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src=//example.com/abc.jpg/></div>', {
       parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
     }), [
       {
         "index": 34,

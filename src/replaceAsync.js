@@ -1,7 +1,7 @@
 const find = require("./find");
 
-function replaceAsync(html, callback, settings = { tag: "img", attr: "src" }) {
-  let findResult = find(html, settings);
+function replaceAsync(html, callback, options) {
+  let findResult = find(html, options);
   let segments = [];
   let pointer = 0;
   findResult.forEach(result => {
