@@ -267,10 +267,32 @@ Same as that of ```replace```
 
 ## download and replace all image links in html
 ```javascript
-let replacedHtml = await replaceAsync(html, (item)=>{
-    return http.get(item.parsedUrl).then(saveToLocal).then(result => result.localImagePath)
-}, { tag:"img", attr:"src", parseAttrValueAsUrl: true })
+htmlFindReplaceElementAttrs.replaceAsync(html, (item) => new Promise(resolve => {
+    downloadImage(item.parsedUrl).then(downloadResult => {
+      resolve(downloadResult.path);
+    });
+  }),
+  { tag: "img", attr: "src", parseAttrValueAsUrl: true, baseUrl: "https://www.gravatar.com" },
+).then(replacedHtml => {
+  console.log(replacedHtml)
+});
+
+function downloadImage(imageUrl) {
+  return new Promise(resolve => {
+    axios({
+      url: imageUrl,
+      responseType: 'stream',
+    }).then(response => {
+      let tmpPath = "tmp_" + Math.random();
+      response.data.pipe(fs.createWriteStream(tmpPath));
+      response.data.on('end', () => {
+        resolve({ path: tmpPath });
+      })
+    });
+  });
+}
 ```
 
 # LICENSE
+
 MIT
