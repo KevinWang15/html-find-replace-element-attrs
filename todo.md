@@ -9,8 +9,8 @@
 - [x] rename to ```html-find-replace-element-attrs```?
 - [x] option to parse url
 - [x] automatically add quotes sometimes
-- [ ] finish DEMO: download and replace all image links in html
-- [ ] better documents
-- [ ] calc bundle size
-- [ ] npm publish
+- [x] finish DEMO: download and replace all image links in html
+- [x] better documents
+- [x] calc bundle size
+- [x] npm publish
 - [ ] typescript

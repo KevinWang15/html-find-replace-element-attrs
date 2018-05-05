@@ -4,6 +4,14 @@ Find (or replace, sync/async) attributes of elements (e.g. img src) in an html s
 
 It's a new library, its stability has not been battle-tested. If you find a bug, [please report](https://github.com/KevinWang15/html-find-replace-element-attrs/issues/new).
 
+[8.4kB MINIFIED, 3.5kB MINIFIED + GZIPPED](https://bundlephobia.com/result?p=html-find-replace-element-attrs@1.0.0)
+
+# Installation
+
+```
+npm i html-find-replace-element-attrs
+```
+
 # API
 
 ## [find(html, options?)](./tests/find.js)
