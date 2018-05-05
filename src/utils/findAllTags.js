@@ -57,8 +57,6 @@ function findAllTags(html, options) {
       }
     }
   }
-
-  console.log("List", list);
   return list;
 
   // let tags=[];
