@@ -1,5 +1,6 @@
 const getAttrList = require("./utils/getAttrList");
 const parseUrl = require("./utils/parseUrl");
+const findAllTags = require("./utils/findAllTags");
 
 function find(html, options = { tag: "", attr: "", "parseAttrValueAsUrl": false }) {
   const results = [];
@@ -10,18 +11,10 @@ function find(html, options = { tag: "", attr: "", "parseAttrValueAsUrl": false 
   if (!attr) {
     throw "tag is required"
   }
-  let tagRegexp = new RegExp(`<${tag} (.+?)/?>`, "img");
-  let tagRegexpMatch = tagRegexp.exec(html);
-  let tagRegexpMatches = [];
-  while (tagRegexpMatch != null) {
-    tagRegexpMatches.push({
-      index: tagRegexpMatch.index + 2 + tag.length,
-      value: tagRegexpMatch[1],
-    });
-    tagRegexpMatch = tagRegexp.exec(html);
-  }
-  // tagRegexpMatches = [ 'src="./hello.jpg"', 'width=100 src="./hello.jpg"' ]
-  tagRegexpMatches.forEach(match => {
+  let tags = findAllTags(html,options);
+
+  // tags = [ 'src="./hello.jpg"', 'width=100 src="./hello.jpg"' ]
+  tags.forEach(match => {
     let attrList = getAttrList(match.value);
     let attrValue = attrList[attr];
     if (attrValue) {

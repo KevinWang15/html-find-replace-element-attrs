@@ -188,4 +188,16 @@ describe("find", function () {
       },
     ]);
   });
+  it("should work with > in attr value", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/<img src=x>a " alt=""></div>', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 35,
+        "parsedUrl": "http://www.example.com/<img src=x>a ",
+        "value": "http://www.example.com/<img src=x>a "
+      },
+    ]);
+  });
 });
