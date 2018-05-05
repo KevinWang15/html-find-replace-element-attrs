@@ -10,7 +10,15 @@ describe("replace", function () {
   });
   it("should support callback function", function () {
     assert.deepEqual(
-      htmlFindSrc.replace('...<img src="./abc.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...', _=>_.toUpperCase())
+      htmlFindSrc.replace('...<img src="./abc.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...', _=>_.value.toUpperCase())
       , `...<img src="./ABC.JPG">abc</img>...<img width=100 src="./HELLO.JPG">abc</img>..`);
+  });
+  it("should be able to work with parseUrl", function () {
+    assert.deepEqual(
+      htmlFindSrc.replace('...<img src="./abc.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...', _ => _.parsedUrl, {
+        parseAttrValueAsUrl: true,
+        baseUrl: "http://example.com",
+      })
+      , `...<img src="http://example.com/abc.jpg">abc</img>...<img width=100 src="http://example.com/hello.jpg">abc</img>..`);
   });
 });

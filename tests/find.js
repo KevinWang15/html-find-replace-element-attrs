@@ -50,4 +50,15 @@ describe("find", function () {
       },
     ]);
   });
+  it("should be able to work with parseUrl", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src=//example.com/abc.jpg/></div>', {
+      parseAttrValueAsUrl: true,
+    }), [
+      {
+        "index": 34,
+        "parsedUrl": "http://example.com/abc.jpg",
+        "value": "//example.com/abc.jpg",
+      },
+    ]);
+  });
 });

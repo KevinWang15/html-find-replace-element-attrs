@@ -19,7 +19,7 @@ function replace(html, callback, settings = { tag: "img", attr: "src" }) {
       pointer = result.index;
     }
     pointer += result.value.length;
-    segments.push(normalizedCallback(result.value));
+    segments.push(normalizedCallback(result));
   });
   if (pointer < html.length) {
     segments.push(html.substring(pointer, html.length - 1))

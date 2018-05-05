@@ -10,7 +10,7 @@ function replaceAsync(html, callback, settings = { tag: "img", attr: "src" }) {
       pointer = result.index;
     }
     pointer += result.value.length;
-    segments.push(callback(result.value));
+    segments.push(callback(result));
   });
   if (pointer < html.length) {
     segments.push(Promise.resolve(html.substring(pointer, html.length - 1)))

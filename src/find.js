@@ -1,8 +1,9 @@
 const getAttrList = require("./utils/getAttrList");
+const parseUrl = require("./utils/parseUrl");
 
-function find(html, settings = { tag: "img", attr: "src" }) {
+function find(html, settings = { tag: "img", attr: "src", "parseAttrValueAsUrl": false }) {
   const results = [];
-  const { tag = "img", attr = "src" } = settings;
+  const { tag = "img", attr = "src", parseAttrValueAsUrl = false } = settings;
   let tagRegexp = new RegExp(`<${tag} (.+?)/?>`, "img");
   let tagRegexpMatch = tagRegexp.exec(html);
   let tagRegexpMatches = [];
@@ -18,7 +19,11 @@ function find(html, settings = { tag: "img", attr: "src" }) {
     let attrList = getAttrList(match.value);
     let attrValue = attrList[attr];
     if (attrValue) {
-      results.push({ ...attrValue, index: attrValue.index + match.index });
+      let item = { ...attrValue, index: attrValue.index + match.index };
+      if (parseAttrValueAsUrl) {
+        item.parsedUrl = parseUrl(attrValue.value, settings);
+      }
+      results.push(item);
     }
   });
 
