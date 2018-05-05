@@ -19,6 +19,7 @@
   "homepage": "https://github.com/KevinWang15/html-find-src#readme",
   "dependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.1.1"
+    "mocha": "^5.1.1",
+    "url-join": "^4.0.0"
   }
 }

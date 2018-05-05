@@ -13,7 +13,7 @@
 ## available options
 
 ```json
-{"tag":"img", "attr":""}
+{"tag":"img", "attr":"", "parseAttrValueAsUrl":false, "baseUrl":"", "urlProtocol": "(automatically set from baseUrl or )http"}
 ```
 
 # DEMOS
@@ -22,5 +22,5 @@
 ```javascript
 let replacedHtml = await replaceAsync(html, (link, parsedLink)=>{
     return http.get(parsedLink).then(saveToTmpFile).then(result => result.localImagePath)
-})
+}, { parseAttrValueAsUrl:true })
 ```

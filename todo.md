@@ -9,3 +9,4 @@
 - [ ] typescript
 - [ ] npm publish
 - [ ] rename to ```html-attr-manipulate```?
+- [ ] option to parse url
