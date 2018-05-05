@@ -12,7 +12,7 @@ describe("replaceAsync", function () {
           tag: "img",
           attr: "src",
         },
-      ), `...<img src="./ABC.JPG">abc</img>...<img width=100 src="./HELLO.JPG">abc</img>..`)
+      ), `...<img src="./ABC.JPG">abc</img>...<img width=100 src="./HELLO.JPG">abc</img>...`)
   });
   it("should be able to work with parseUrl", async function () {
     assert.deepEqual(
@@ -25,6 +25,6 @@ describe("replaceAsync", function () {
           tag: "img",
           attr: "src",
         },
-      ), `...<img src="http://example.com/abc.jpg">abc</img>...<img width=100 src="http://example.com/hello.jpg">abc</img>..`)
+      ), `...<img src="http://example.com/abc.jpg">abc</img>...<img width=100 src="http://example.com/hello.jpg">abc</img>...`)
   });
 });

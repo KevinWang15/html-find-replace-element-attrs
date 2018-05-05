@@ -9,7 +9,14 @@ describe("replace", function () {
         tag: "img",
         attr: "src",
       })
-      , `...<img src="hi.jpg">abc</img>...<img width=100 src="hi.jpg">abc</img>..`,
+      , `...<img src="hi.jpg">abc</img>...<img width=100 src="hi.jpg">abc</img>...`,
+    );
+    assert.deepEqual(
+      htmlFindSrc.replace('<div><img src=../a.jpg alt=\'\'><img src=\'/b.jpg\' alt=\'\'></div>', "http://www.abc.com/1.jpg", {
+        tag: "img",
+        attr: "src",
+      })
+      , `<div><img src=http://www.abc.com/1.jpg alt=''><img src='http://www.abc.com/1.jpg' alt=''></div>`,
     );
   });
   it("should support callback function", function () {
@@ -18,7 +25,7 @@ describe("replace", function () {
         tag: "img",
         attr: "src",
       })
-      , `...<img src="./ABC.JPG">abc</img>...<img width=100 src="./HELLO.JPG">abc</img>..`);
+      , `...<img src="./ABC.JPG">abc</img>...<img width=100 src="./HELLO.JPG">abc</img>...`);
   });
   it("should be able to work with parseUrl", function () {
     assert.deepEqual(
@@ -27,6 +34,6 @@ describe("replace", function () {
         baseUrl: "http://example.com",
         tag: "img", attr: "src",
       })
-      , `...<img src="http://example.com/abc.jpg">abc</img>...<img width=100 src="http://example.com/hello.jpg">abc</img>..`);
+      , `...<img src="http://example.com/abc.jpg">abc</img>...<img width=100 src="http://example.com/hello.jpg">abc</img>...`);
   });
 });

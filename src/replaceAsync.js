@@ -13,7 +13,7 @@ function replaceAsync(html, callback, options) {
     segments.push(callback(result));
   });
   if (pointer < html.length) {
-    segments.push(Promise.resolve(html.substring(pointer, html.length - 1)))
+    segments.push(Promise.resolve(html.substring(pointer, html.length)))
   }
   return Promise.all(segments).then(_ => _.join(''));
 }

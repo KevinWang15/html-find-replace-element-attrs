@@ -22,7 +22,7 @@ function replace(html, callback, options) {
     segments.push(normalizedCallback(result));
   });
   if (pointer < html.length) {
-    segments.push(html.substring(pointer, html.length - 1))
+    segments.push(html.substring(pointer, html.length))
   }
   return segments.join('');
 }
