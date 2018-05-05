@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests",
+    "coverage": "nyc mocha tests"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,11 @@
   },
   "homepage": "https://github.com/KevinWang15/html-find-src#readme",
   "dependencies": {
+    "url-join": "^4.0.0"
+  },
+  "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.1.1",
-    "url-join": "^4.0.0"
+    "nyc": "^11.7.1"
   }
 }
