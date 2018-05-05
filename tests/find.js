@@ -200,4 +200,21 @@ describe("find", function () {
       },
     ]);
   });
+  it("should work in spite of lots of \\w", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class">\n<img \nsrc="http://\nwww.example.com/<img src=x>a "\t\n alt=""></div><img \nsrc="http://\nwww.example.com/<img src=xa "\n\n alt="">', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 37,
+        "parsedUrl": "http://\nwww.example.com/<img src=x>a ",
+        "value": "http://\nwww.example.com/<img src=x>a ",
+      },
+      {
+        "index": 102,
+        "parsedUrl": "http://\nwww.example.com/<img src=xa ",
+        "value": "http://\nwww.example.com/<img src=xa ",
+      }
+    ]);
+  });
 });
