@@ -19,7 +19,12 @@ function replace(html, callback, options) {
       pointer = result.index;
     }
     pointer += result.value.length;
-    segments.push(normalizedCallback(result));
+    let normalizedResult = normalizedCallback(result);
+    if (result.quoteType === ' ' && (normalizedResult.indexOf(' ') >= 0 || normalizedResult.indexOf('\t') >= 0 || normalizedResult.indexOf('\n') >= 0 || normalizedResult.indexOf('\r') >= 0 || normalizedResult.indexOf('\f') >= 0)) {
+      segments.push(`"${normalizedResult}"`);
+    } else {
+      segments.push(normalizedResult);
+    }
   });
   if (pointer < html.length) {
     segments.push(html.substring(pointer, html.length))

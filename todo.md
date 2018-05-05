@@ -8,6 +8,7 @@
 - [x] CI
 - [x] rename to ```html-find-replace-element-attrs```?
 - [x] option to parse url
+- [x] automatically add quotes sometimes
 - [ ] finish DEMO: download and replace all image links in html
 - [ ] better documents
 - [ ] calc bundle size

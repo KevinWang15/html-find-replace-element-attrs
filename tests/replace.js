@@ -36,4 +36,11 @@ describe("replace", function () {
       })
       , `...<img src="http://example.com/abc.jpg">abc</img>...<img width=100 src="http://example.com/hello.jpg">abc</img>...`);
   });
+  it("should automatically add quotes sometimes", function () {
+    assert.deepEqual(
+      htmlFindSrc.replace('...<img src=abc.jpg>abc</img>...', "hello world.jpg", {
+        tag: "img", attr: "src",
+      })
+      , `...<img src="hello world.jpg">abc</img>...`);
+  });
 });
