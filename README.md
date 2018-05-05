@@ -1,8 +1,6 @@
-# html-find-src
-[![Build Status](https://travis-ci.org/KevinWang15/html-find-src.svg?branch=master)](https://travis-ci.org/KevinWang15/html-find-src)
-[![codecov](https://codecov.io/gh/KevinWang15/html-find-src/branch/master/graph/badge.svg)](https://codecov.io/gh/KevinWang15/html-find-src)
+# html-find-replace-element-attrs [![Build Status](https://travis-ci.org/KevinWang15/html-find-replace-element-attrs.svg?branch=master)](https://travis-ci.org/KevinWang15/html-find-replace-element-attrs) [![codecov](https://codecov.io/gh/KevinWang15/html-find-replace-element-attrs/branch/master/graph/badge.svg)](https://codecov.io/gh/KevinWang15/html-find-replace-element-attrs)
 
-[WIP] Find (or replace, sync/async) img src (or other attributes of other elements) in an html string
+[WIP] Find (or replace, sync/async) attributes of elements (e.g. img src) in an html string
 
 # API
 

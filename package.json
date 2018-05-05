@@ -1,5 +1,5 @@
 {
-  "name": "html-find-src",
+  "name": "html-find-replace-element-attrs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KevinWang15/html-find-src.git"
+    "url": "git+https://github.com/KevinWang15/html-find-replace-element-attrs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/KevinWang15/html-find-src/issues"
+    "url": "https://github.com/KevinWang15/html-find-replace-element-attrs/issues"
   },
-  "homepage": "https://github.com/KevinWang15/html-find-src#readme",
+  "homepage": "https://github.com/KevinWang15/html-find-replace-element-attrs#readme",
   "dependencies": {
     "url-join": "^4.0.0"
   },

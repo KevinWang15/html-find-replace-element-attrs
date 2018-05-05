@@ -6,8 +6,8 @@
 - [ ] escaping: character ">" in attr value
 - [ ] escaping: \\" in ".."
 - [x] coverage
-- [ ] CI
+- [x] CI
 - [ ] typescript
 - [ ] npm publish
-- [ ] rename to ```html-attr-manipulate```?
+- [x] rename to ```html-find-replace-element-attrs```?
 - [ ] option to parse url
