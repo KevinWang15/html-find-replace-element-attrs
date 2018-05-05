@@ -2,12 +2,14 @@
 - [x] finish API: replace
 - [x] finish API: replaceAsync
 - [x] finish: parsedLink
-- [ ] finish DEMO: download and replace all image links in html
-- [ ] escaping: character ">" in attr value
+- [x] escaping: character ">" in attr value
 - [x] html entities
 - [x] coverage
 - [x] CI
-- [ ] typescript
-- [ ] npm publish
 - [x] rename to ```html-find-replace-element-attrs```?
 - [x] option to parse url
+- [ ] finish DEMO: download and replace all image links in html
+- [ ] better documents
+- [ ] calc bundle size
+- [ ] npm publish
+- [ ] typescript
