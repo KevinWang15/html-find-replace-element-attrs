@@ -20,6 +20,8 @@ describe("parseUrl", function () {
     assert.deepEqual(parseUrl("./a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
     assert.deepEqual(parseUrl("../a.txt", { baseUrl: "ftp://www.example.com/a/b/c/" }), "ftp://www.example.com/a/b/a.txt");
     assert.deepEqual(parseUrl("/a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
+    assert.deepEqual(parseUrl("../a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
+    assert.deepEqual(parseUrl("../../a.txt", { baseUrl: "ftp://www.example.com/b/" }), "ftp://www.example.com/a.txt");
   });
   it("should set url protocol correctly from baseUrl", function () {
     assert.deepEqual(parseUrl("//www.example.com/", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/");

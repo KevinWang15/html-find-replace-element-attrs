@@ -9,7 +9,9 @@ function processDotDot(url) {
     if (stack[i] === '.') {
       continue;
     } else if (stack[i] === '..') {
-      newStack.pop();
+      if (newStack.length > 1) {
+        newStack.pop();
+      }
     } else {
       newStack.push(stack[i]);
     }
