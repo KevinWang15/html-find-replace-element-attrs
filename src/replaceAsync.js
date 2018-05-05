@@ -1,21 +1,27 @@
 const find = require("./find");
+const replace = require("./replace");
 
 function replaceAsync(html, callback, options) {
-  let findResult = find(html, options);
-  let segments = [];
-  let pointer = 0;
-  findResult.forEach(result => {
-    if (result.index > pointer) {
-      segments.push(Promise.resolve(html.substring(pointer, result.index)));
-      pointer = result.index;
-    }
-    pointer += result.value.length;
-    segments.push(callback(result));
-  });
-  if (pointer < html.length) {
-    segments.push(Promise.resolve(html.substring(pointer, html.length)))
+  if (typeof callback === 'string') {
+    return Promise.resolve(replace(html, callback, options));
   }
-  return Promise.all(segments).then(_ => _.join(''));
+  let findResult = find(html, options);
+  let callbackPromises = [];
+  findResult.forEach(result => {
+    let callbackResult = callback(result);
+    if (typeof callbackResult === 'string') {
+      callbackPromises.push(Promise.resolve(callbackResult));
+    } else {
+      callbackPromises.push(callbackResult);
+    }
+  });
+
+  return new Promise(resolve => {
+    Promise.all(callbackPromises).then(replacements => {
+      let i = 0;
+      resolve(replace(html, (cb) => replacements[i++], options))
+    });
+  });
 }
 
 module.exports = replaceAsync;

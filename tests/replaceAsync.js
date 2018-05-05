@@ -3,7 +3,24 @@ const chai = require("chai");
 const assert = chai.assert;
 
 describe("replaceAsync", function () {
+
+  it("should do replacement correctly", async function () {
+    assert.deepEqual(
+      await htmlFindSrc.replaceAsync('...<img src="./abc.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...', "hi.jpg", {
+        tag: "img",
+        attr: "src",
+      })
+      , `...<img src="hi.jpg">abc</img>...<img width=100 src="hi.jpg">abc</img>...`,
+    )
+  });
   it("should do async replacement correctly", async function () {
+    assert.deepEqual(
+      await htmlFindSrc.replaceAsync('...<img src="./abc.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...',
+        _ => _.value.toUpperCase(), {
+          tag: "img",
+          attr: "src",
+        },
+      ), `...<img src="./ABC.JPG">abc</img>...<img width=100 src="./HELLO.JPG">abc</img>...`)
     assert.deepEqual(
       await htmlFindSrc.replaceAsync('...<img src="./abc.jpg">abc</img>...<img width=100 src="./hello.jpg">abc</img>...',
         _ => new Promise(resolve => {
