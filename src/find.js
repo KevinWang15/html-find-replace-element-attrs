@@ -9,7 +9,7 @@ function find(html, options = { tag: "", attr: "", "parseAttrValueAsUrl": false 
     throw "tag is required"
   }
   if (!attr) {
-    throw "tag is required"
+    throw "attr is required"
   }
   let tags = findAllTags(html,options);
 

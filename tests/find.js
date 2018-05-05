@@ -73,12 +73,26 @@ describe("find", function () {
         },
       ]);
   });
+  it("should throw when tag is not set", function () {
+    expect(
+      () => htmlFindSrc.find(
+        "...<img src=helloworld=aaa>abc</img>...",
+        { attr: "src" },
+      )).to.throw("tag is required");
+  });
+  it("should throw when attr is not set", function () {
+    expect(
+      () => htmlFindSrc.find(
+        "...<img src=helloworld=aaa>abc</img>...",
+        { tag: "img" },
+      )).to.throw("attr is required");
+  });
   it("should throw when encountering unexpected =", function () {
     expect(
       () => htmlFindSrc.find(
         "...<img src=helloworld=aaa>abc</img>...",
         { tag: "img", attr: "src" },
-      )).to.throw();
+      )).to.throw("unexpected =");
   });
   it("should be able to handle = in quotes", function () {
     assert.deepEqual(htmlFindSrc.find('...<img src="./1=2.jpg"/>', { tag: "img", attr: "src" }), [{
