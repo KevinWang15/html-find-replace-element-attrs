@@ -15,6 +15,8 @@ describe("parseUrl", function () {
     expect(() => parseUrl("/a.txt")).to.throw('baseUrl must be set to parse a relative url');
   });
   it("should parse relative URL", function () {
+    assert.deepEqual(parseUrl("a.txt", { baseUrl: "ftp://www.example.com" }), "ftp://www.example.com/a.txt");
+    assert.deepEqual(parseUrl("a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
     assert.deepEqual(parseUrl("/a.txt", { baseUrl: "ftp://www.example.com" }), "ftp://www.example.com/a.txt");
     assert.deepEqual(parseUrl("/a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
     assert.deepEqual(parseUrl("./a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
@@ -22,6 +24,8 @@ describe("parseUrl", function () {
     assert.deepEqual(parseUrl("/a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
     assert.deepEqual(parseUrl("../a.txt", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/a.txt");
     assert.deepEqual(parseUrl("../../a.txt", { baseUrl: "ftp://www.example.com/b/" }), "ftp://www.example.com/a.txt");
+    assert.deepEqual(parseUrl("/a.txt", { baseUrl: "ftp://www.example.com/b/" }), "ftp://www.example.com/a.txt");
+
   });
   it("should set url protocol correctly from baseUrl", function () {
     assert.deepEqual(parseUrl("//www.example.com/", { baseUrl: "ftp://www.example.com/" }), "ftp://www.example.com/");

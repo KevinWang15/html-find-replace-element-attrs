@@ -51,6 +51,11 @@ function parseUrl(urlToParse, options = {}) {
     if (!baseUrl) {
       throw "baseUrl must be set to parse a relative url";
     }
+    if (urlToParse.startsWith('/')) {
+      let match = baseUrl.match(/^((?:\w+:)?\/\/)?(.+?)$/im);
+      let stack = match[2].split('/');
+      baseUrl = match[1] + stack[0];
+    }
     let url = urlJoin(baseUrl, urlToParse);
     return processDotDot(url);
   }
