@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha tests",
     "coverage": "nyc mocha tests",
-    "build": "babel src --out-dir=dist"
+    "build": "babel src --out-dir=dist",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "repository": {
     "type": "git",
