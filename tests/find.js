@@ -47,6 +47,32 @@ describe("find", function () {
         },
       ]);
   });
+  it("should work with alternating quotes", function () {
+    assert.deepEqual(
+      htmlFindSrc.find(
+        `...<img src='./hello "world".jpg'>abc</img>...`,
+        { tag: "img", attr: "src" },
+      ),
+      [
+        {
+          value: `./hello "world".jpg`,
+          index: 13,
+        },
+      ]);
+  });
+  it("should work even if surrounded by other attrs", function () {
+    assert.deepEqual(
+      htmlFindSrc.find(
+        `...<img class="a" src='./helloworld.jpg' id="b">abc</img>...`,
+        { tag: "img", attr: "src" },
+      ),
+      [
+        {
+          "value": "./helloworld.jpg",
+          "index": 23,
+        },
+      ]);
+  });
   it("should throw when encountering unexpected =", function () {
     expect(
       () => htmlFindSrc.find(
