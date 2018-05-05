@@ -2,12 +2,14 @@
   "name": "html-find-replace-element-attrs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/main.js",
+  "module": "./src/index.js",
   "scripts": {
     "test": "mocha tests",
     "coverage": "nyc mocha tests",
-    "build": "babel src --out-dir=dist",
-    "report-coverage": "npm run coverage && nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "report-coverage": "npm run coverage && nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "build": "webpack",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,14 +23,17 @@
   },
   "homepage": "https://github.com/KevinWang15/html-find-replace-element-attrs#readme",
   "dependencies": {
+    "babel-loader": "^7.1.4",
     "url-join": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "mocha": "^5.1.1",
-    "nyc": "^11.7.1"
+    "nyc": "^11.7.1",
+    "webpack": "^4.7.0",
+    "webpack-cli": "^2.1.2"
   }
 }
