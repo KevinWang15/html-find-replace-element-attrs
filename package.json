@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "./dist/main.js",
-  "module": "./src/index.js",
   "scripts": {
     "test": "mocha tests",
     "coverage": "nyc mocha tests",

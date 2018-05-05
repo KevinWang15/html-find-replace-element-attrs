@@ -4,3 +4,5 @@ todo.md
 .nyc_output
 package-lock.json
 *.lcov
+/src
+/tests
