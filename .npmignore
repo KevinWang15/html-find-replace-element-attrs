@@ -1,0 +1,6 @@
+.travis.yml
+todo.md
+.idea
+.nyc_output
+package-lock.json
+*.lcov
