@@ -118,4 +118,74 @@ describe("find", function () {
       },
     ]);
   });
+  it("should work with html entities", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/%E5%95%8A%20啊a&#183;.png" alt=""></div>', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 35,
+        "parsedUrl": "http://www.example.com/%E5%95%8A%20啊a·.png",
+        "value": "http://www.example.com/%E5%95%8A%20啊a&#183;.png",
+      },
+    ]);
+  });
+  it("should work with special html entities", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&quot;.png" alt=""></div>', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 35,
+        "parsedUrl": "http://www.example.com/\".png",
+        "value": "http://www.example.com/&quot;.png",
+      },
+    ]);
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&quot.png" alt=""></div>', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 35,
+        "parsedUrl": "http://www.example.com/\".png",
+        "value": "http://www.example.com/&quot.png",
+      },
+    ]);
+  });
+  it("should not treat &gt=1 as html entities", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&gt=1" alt=""></div>', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 35,
+        "parsedUrl": "http://www.example.com/&gt=1",
+        "value": "http://www.example.com/&gt=1"
+      },
+    ]);
+  });
+  it("should not treat &gt1 as html entities", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&gt1" alt=""></div>', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 35,
+        "parsedUrl": "http://www.example.com/&gt1",
+        "value": "http://www.example.com/&gt1"
+      },
+    ]);
+  });
+  it("should treat &gt as html entities", function () {
+    assert.deepEqual(htmlFindSrc.find('...<div class="my-class"><img src="http://www.example.com/&gt " alt=""></div>', {
+      parseAttrValueAsUrl: true,
+      tag: "img", attr: "src",
+    }), [
+      {
+        "index": 35,
+        "parsedUrl": "http://www.example.com/> ",
+        "value": "http://www.example.com/&gt "
+      },
+    ]);
+  });
 });

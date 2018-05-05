@@ -1,4 +1,5 @@
 const urlJoin = require("url-join");
+const handleHtmlEntities = require('./handleHtmlEntities');
 
 function processDotDot(url) {
   let match = url.match(/^((?:\w+:)?\/\/)?(.+?)$/im);
@@ -18,6 +19,9 @@ function processDotDot(url) {
 
 function parseUrl(urlToParse, options = {}) {
   let { urlProtocol, baseUrl } = options;
+
+  // handle html entities
+  urlToParse = handleHtmlEntities(urlToParse);
 
   if (urlToParse.startsWith("//")) {
     // it should parse protocol-relative URL
