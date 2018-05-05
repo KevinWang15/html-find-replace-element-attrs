@@ -215,6 +215,42 @@ describe("find", function () {
     ]);
   });
   it("should work in spite of lots of \\w", function () {
+
+    assert.deepEqual(
+      htmlFindSrc.find(
+        "...<img src = './hello.jpg'>abc</img>...",
+        { tag: "img", attr: "src" },
+      ),
+      [
+        {
+          value: "./hello.jpg",
+          index: 15,
+        },
+      ]);
+
+    assert.deepEqual(
+      htmlFindSrc.find(
+        "...<img src =\n './hello.jpg'>abc</img>...",
+        { tag: "img", attr: "src" },
+      ),
+      [
+        {
+          value: "./hello.jpg",
+          index: 16,
+        },
+      ]);
+    assert.deepEqual(
+      htmlFindSrc.find(
+        "...<img src =\n ./hello.jpg b>abc</img>...",
+        { tag: "img", attr: "src" },
+      ),
+      [
+        {
+          value: "./hello.jpg",
+          index: 15,
+        },
+      ]);
+
     assert.deepEqual(htmlFindSrc.find('...<div class="my-class">\n<img \nsrc="http://\nwww.example.com/<img src=x>a "\t\n alt=""></div><img \nsrc="http://\nwww.example.com/<img src=xa "\n\n alt="">', {
       parseAttrValueAsUrl: true,
       tag: "img", attr: "src",

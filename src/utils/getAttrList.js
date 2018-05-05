@@ -12,6 +12,9 @@ function getAttrList(raw) {
         state = 1;
         //next: find what quote it uses
         i++;
+        while(raw[i] === ` ` || raw[i] === "\t" || raw[i] === "\n" || raw[i] === "\r" || raw[i] === "\f"){
+          i++;
+        }
         if (raw[i] === `'`) {
           quote = `'`;
         } else if (raw[i] === `"`) {
@@ -41,7 +44,10 @@ function getAttrList(raw) {
     } else {
       // default case for all remaining characters
       if (state === 0) {
-        attrName += next;
+        if (next === ` ` || next === "\t" || next === "\n" || next === "\r" || next === "\f") {
+        } else {
+          attrName += next;
+        }
       } else if (state === 1) {
         attrValue += next;
       }
