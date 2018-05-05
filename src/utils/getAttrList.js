@@ -34,7 +34,7 @@ function getAttrList(raw) {
       attrValue = "";
       quote = "";
       // works too for "space for no-quotes"
-    } else if (next === ` `) {
+    } else if (next === ` ` || next === "\t" || next === "\n" || next === "\r" || next === "\f") {
       if (state === 1) {
         attrValue += next;
       }
