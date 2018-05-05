@@ -24,3 +24,6 @@ let replacedHtml = await replaceAsync(html, (item)=>{
     return http.get(item.parsedUrl).then(saveToLocal).then(result => result.localImagePath)
 }, { tag:"img", attr:"src", parseAttrValueAsUrl: true })
 ```
+
+# LICENSE
+MIT
