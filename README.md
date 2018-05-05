@@ -13,14 +13,14 @@
 ## available options
 
 ```json
-{"tag":"img", "attr":"", "parseAttrValueAsUrl":false, "baseUrl":"", "urlProtocol": "(automatically set from baseUrl or )http"}
+{"tag":"img", "attr":"src", "parseAttrValueAsUrl":false, "baseUrl":"", "urlProtocol": "(automatically set from baseUrl or )http"}
 ```
 
 # DEMOS
 
 ## download and replace all image links in html
 ```javascript
-let replacedHtml = await replaceAsync(html, (link, parsedLink)=>{
-    return http.get(parsedLink).then(saveToTmpFile).then(result => result.localImagePath)
-}, { parseAttrValueAsUrl:true })
+let replacedHtml = await replaceAsync(html, (item)=>{
+    return http.get(item.parsedUrl).then(saveToLocal).then(result => result.localImagePath)
+}, { tag:"img", attr:"src", parseAttrValueAsUrl: true })
 ```
