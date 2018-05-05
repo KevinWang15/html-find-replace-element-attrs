@@ -13,10 +13,12 @@ describe("find", function () {
       [
         {
           value: "./hello.jpg",
+          quoteType: "\"",
           index: 13,
         },
         {
           "index": 58,
+          quoteType: "\"",
           "value": "./hello.jpg",
         },
       ]);
@@ -30,6 +32,7 @@ describe("find", function () {
       [
         {
           value: "./hello.jpg",
+          quoteType: "'",
           index: 13,
         },
       ]);
@@ -43,6 +46,7 @@ describe("find", function () {
       [
         {
           value: "./hello world.jpg",
+          quoteType: "'",
           index: 13,
         },
       ]);
@@ -56,6 +60,7 @@ describe("find", function () {
       [
         {
           value: `./hello "world".jpg`,
+          quoteType: "'",
           index: 13,
         },
       ]);
@@ -69,6 +74,7 @@ describe("find", function () {
       [
         {
           "value": "./helloworld.jpg",
+          quoteType: "'",
           "index": 23,
         },
       ]);
@@ -97,6 +103,7 @@ describe("find", function () {
   it("should be able to handle = in quotes", function () {
     assert.deepEqual(htmlFindSrc.find('...<img src="./1=2.jpg"/>', { tag: "img", attr: "src" }), [{
       value: './1=2.jpg',
+      quoteType: "\"",
       index: 13,
     }]);
   });
@@ -106,6 +113,7 @@ describe("find", function () {
       attr: "src",
     }), [{
       value: 'abc.jpg',
+      quoteType: " ",
       index: 12,
     }]);
   });
@@ -117,6 +125,7 @@ describe("find", function () {
       {
         "index": 12,
         "value": "//example.com/abc.jpg",
+        quoteType: " ",
       },
     ]);
   });
@@ -127,6 +136,7 @@ describe("find", function () {
     }), [
       {
         "index": 34,
+        quoteType: " ",
         "parsedUrl": "http://example.com/abc.jpg",
         "value": "//example.com/abc.jpg",
       },
@@ -139,6 +149,7 @@ describe("find", function () {
     }), [
       {
         "index": 35,
+        quoteType: "\"",
         "parsedUrl": "http://www.example.com/%E5%95%8A%20啊a·.png",
         "value": "http://www.example.com/%E5%95%8A%20啊a&#183;.png",
       },
@@ -151,6 +162,7 @@ describe("find", function () {
     }), [
       {
         "index": 35,
+        quoteType: "\"",
         "parsedUrl": "http://www.example.com/♣/\".png",
         "value": "http://www.example.com/&clubs;/&quot;.png"
       },
@@ -161,6 +173,7 @@ describe("find", function () {
     }), [
       {
         "index": 35,
+        quoteType: "\"",
         "parsedUrl": "http://www.example.com/\".png",
         "value": "http://www.example.com/&quot.png",
       },
@@ -173,6 +186,7 @@ describe("find", function () {
     }), [
       {
         "index": 35,
+        quoteType: "\"",
         "parsedUrl": "http://www.example.com/&gt=1",
         "value": "http://www.example.com/&gt=1"
       },
@@ -185,6 +199,7 @@ describe("find", function () {
     }), [
       {
         "index": 35,
+        quoteType: "\"",
         "parsedUrl": "http://www.example.com/&gt1",
         "value": "http://www.example.com/&gt1"
       },
@@ -197,6 +212,7 @@ describe("find", function () {
     }), [
       {
         "index": 35,
+        quoteType: "\"",
         "parsedUrl": "http://www.example.com/> ",
         "value": "http://www.example.com/&gt "
       },
@@ -209,6 +225,7 @@ describe("find", function () {
     }), [
       {
         "index": 35,
+        quoteType: "\"",
         "parsedUrl": "http://www.example.com/<img src=x>a ",
         "value": "http://www.example.com/<img src=x>a "
       },
@@ -223,6 +240,7 @@ describe("find", function () {
       ),
       [
         {
+          quoteType: "'",
           value: "./hello.jpg",
           index: 15,
         },
@@ -235,6 +253,7 @@ describe("find", function () {
       ),
       [
         {
+          quoteType: "'",
           value: "./hello.jpg",
           index: 16,
         },
@@ -246,6 +265,7 @@ describe("find", function () {
       ),
       [
         {
+          quoteType: " ",
           value: "./hello.jpg",
           index: 15,
         },
@@ -257,11 +277,13 @@ describe("find", function () {
     }), [
       {
         "index": 37,
+        quoteType: "\"",
         "parsedUrl": "http://\nwww.example.com/<img src=x>a ",
         "value": "http://\nwww.example.com/<img src=x>a ",
       },
       {
         "index": 102,
+        quoteType: "\"",
         "parsedUrl": "http://\nwww.example.com/<img src=xa ",
         "value": "http://\nwww.example.com/<img src=xa ",
       }

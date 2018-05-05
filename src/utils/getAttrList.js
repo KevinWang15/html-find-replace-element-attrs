@@ -32,7 +32,7 @@ function getAttrList(raw) {
       }
     } else if (quote && next === quote) {
       state = 0;
-      list [attrName] = { value: attrValue, index: valueIndex };
+      list [attrName] = { value: attrValue, index: valueIndex, quoteType: quote };
       attrName = "";
       attrValue = "";
       quote = "";
@@ -54,7 +54,7 @@ function getAttrList(raw) {
     }
   }
   if (attrName && attrValue) {
-    list[attrName] = { value: attrValue, index: valueIndex };
+    list[attrName] = { value: attrValue, index: valueIndex, quoteType: " " };
   }
   return list;
 }
